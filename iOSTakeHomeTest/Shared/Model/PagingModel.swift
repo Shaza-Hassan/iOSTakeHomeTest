@@ -8,20 +8,25 @@
 import Foundation
 
 struct PagingModel<T: Codable> : Codable {
-    let results: [T]
+    var results: [T] = []
     
-    let info: PagingInfo
+    var info: PagingInfo?
     
     var hasNext: Bool {
-        return info.next != nil
+        return info?.next != nil
     }
     
     var canLoadMore: Bool {
-        return hasNext && pagingStatus == .loaded
+        return hasNext && pagingStatus == .loadedData
     }
     
-    let pagingStatus: PagingStatus
+    var pagingStatus: PagingStatus? = .idle
+        
+    static var empty: PagingModel {
+        return PagingModel(results: [], info: PagingInfo(count: 0, pages: 0, next: nil, prev: nil), pagingStatus: .idle)
+    }
 }
+
 
 struct PagingInfo: Codable {
     let count: Int
@@ -33,7 +38,7 @@ struct PagingInfo: Codable {
 enum PagingStatus: Codable {
     case idle
     case firstPageLoading
-    case loaded
+    case loadedData
     case loadingMore
     case firstPageError
     case loadingMoreError

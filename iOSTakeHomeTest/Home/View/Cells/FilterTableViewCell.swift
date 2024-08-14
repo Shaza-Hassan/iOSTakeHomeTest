@@ -12,6 +12,7 @@ class FilterTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollecti
     
     @IBOutlet weak var collectionView: UICollectionView?
     var selectedFilter: FilterStatus? = nil
+    var delegate: OnFilterSelectedDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -56,6 +57,11 @@ class FilterTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollecti
         }else {
             selectedFilter = filter
         }
+        delegate?.onFilterSelected(filter: selectedFilter)
         collectionView.reloadData()
     }
+}
+
+protocol OnFilterSelectedDelegate {
+    func onFilterSelected(filter: FilterStatus?)
 }

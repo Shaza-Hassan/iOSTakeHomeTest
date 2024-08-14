@@ -12,6 +12,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CharatersViewController" customModule="iOSTakeHomeTest" customModuleProvider="target">
             <connections>
                 <outlet property="charactersTableView" destination="xDe-NS-vn2" id="9qC-0N-3AN"/>
+                <outlet property="errorLabel" destination="W1Z-xf-xHe" id="aF8-21-gcQ"/>
+                <outlet property="loadingView" destination="dvM-Ny-0T6" id="5Gi-4H-Dmq"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -28,13 +30,28 @@
                         <outlet property="delegate" destination="-1" id="39E-YU-LkF"/>
                     </connections>
                 </tableView>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="dvM-Ny-0T6">
+                    <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
+                </activityIndicatorView>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W1Z-xf-xHe" userLabel="Error">
+                    <rect key="frame" x="20" y="416" width="353" height="20.333333333333314"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="W1Z-xf-xHe" secondAttribute="trailing" constant="20" id="Imh-P1-RUt"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="xDe-NS-vn2" secondAttribute="bottom" id="M1H-Qi-bCl"/>
+                <constraint firstItem="W1Z-xf-xHe" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="O2p-GL-SpW"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xDe-NS-vn2" secondAttribute="trailing" id="PHJ-Oj-sk3"/>
                 <constraint firstItem="xDe-NS-vn2" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Yu7-Bw-LDO"/>
+                <constraint firstItem="W1Z-xf-xHe" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="aTr-2p-8do"/>
+                <constraint firstItem="dvM-Ny-0T6" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="hNF-mj-1lR"/>
+                <constraint firstItem="W1Z-xf-xHe" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="p8a-uf-pDH"/>
+                <constraint firstItem="dvM-Ny-0T6" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="scY-fG-iBA"/>
                 <constraint firstItem="xDe-NS-vn2" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="wYu-uE-Tis"/>
             </constraints>
             <point key="canvasLocation" x="79" y="20"/>
