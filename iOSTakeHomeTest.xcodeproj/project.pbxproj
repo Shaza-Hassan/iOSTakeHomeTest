@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C621271F2C6E00A50005EC38 /* MockingKit in Frameworks */ = {isa = PBXBuildFile; productRef = C621271E2C6E00A50005EC38 /* MockingKit */; };
 		C62A251E2C6B338A00873D40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62A251D2C6B338A00873D40 /* AppDelegate.swift */; };
 		C62A25202C6B338A00873D40 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62A251F2C6B338A00873D40 /* SceneDelegate.swift */; };
 		C62A25222C6B338A00873D40 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62A25212C6B338A00873D40 /* ViewController.swift */; };
@@ -93,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C621271F2C6E00A50005EC38 /* MockingKit in Frameworks */,
 				C6FEDFC72C6B708F0058EBEF /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -137,9 +139,9 @@
 		C62A251C2C6B338A00873D40 /* iOSTakeHomeTest */ = {
 			isa = PBXGroup;
 			children = (
-				C69827742C6DD7F40011E3A3 /* Character Details */,
 				C62A25522C6B360000873D40 /* Shared */,
 				C62A254D2C6B34A700873D40 /* Character List */,
+				C69827742C6DD7F40011E3A3 /* Character Details */,
 				C62A251D2C6B338A00873D40 /* AppDelegate.swift */,
 				C62A251F2C6B338A00873D40 /* SceneDelegate.swift */,
 				C62A25212C6B338A00873D40 /* ViewController.swift */,
@@ -281,6 +283,7 @@
 			name = iOSTakeHomeTest;
 			packageProductDependencies = (
 				C6FEDFC62C6B708F0058EBEF /* Kingfisher */,
+				C621271E2C6E00A50005EC38 /* MockingKit */,
 			);
 			productName = iOSTakeHomeTest;
 			productReference = C62A251A2C6B338A00873D40 /* iOSTakeHomeTest.app */;
@@ -356,6 +359,7 @@
 			mainGroup = C62A25112C6B338A00873D40;
 			packageReferences = (
 				C6FEDFC52C6B708F0058EBEF /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				C621271D2C6E00A50005EC38 /* XCRemoteSwiftPackageReference "MockingKit" */,
 			);
 			productRefGroup = C62A251B2C6B338A00873D40 /* Products */;
 			projectDirPath = "";
@@ -769,6 +773,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		C621271D2C6E00A50005EC38 /* XCRemoteSwiftPackageReference "MockingKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielsaidi/MockingKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.2;
+			};
+		};
 		C6FEDFC52C6B708F0058EBEF /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -780,6 +792,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C621271E2C6E00A50005EC38 /* MockingKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C621271D2C6E00A50005EC38 /* XCRemoteSwiftPackageReference "MockingKit" */;
+			productName = MockingKit;
+		};
 		C6FEDFC62C6B708F0058EBEF /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C6FEDFC52C6B708F0058EBEF /* XCRemoteSwiftPackageReference "Kingfisher" */;
