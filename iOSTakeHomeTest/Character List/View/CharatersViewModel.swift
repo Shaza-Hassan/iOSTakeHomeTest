@@ -9,7 +9,7 @@ import Foundation
 
 class CharatersViewModel {
     
-    var charatersRepository: CharatersRepository
+    var charatersRepository: CharactersGatway
     var characters: [Character] {
         return charactesPagingModel.results
     }
@@ -20,7 +20,7 @@ class CharatersViewModel {
     
     var error:String? = nil
     
-    init(charatersRepository: CharatersRepository) {
+    init(charatersRepository: CharactersGatway) {
         self.charatersRepository = charatersRepository
     }
     

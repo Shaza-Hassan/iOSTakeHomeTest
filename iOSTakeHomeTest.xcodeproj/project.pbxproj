@@ -8,12 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		C621271F2C6E00A50005EC38 /* MockingKit in Frameworks */ = {isa = PBXBuildFile; productRef = C621271E2C6E00A50005EC38 /* MockingKit */; };
+		C62127222C6E01670005EC38 /* APIClientProtocolMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62127212C6E01670005EC38 /* APIClientProtocolMock.swift */; };
+		C62127242C6E05B80005EC38 /* CharatersRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62127232C6E05B80005EC38 /* CharatersRepositoryTest.swift */; };
+		C62127262C6E0A090005EC38 /* CharatersRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62127252C6E0A090005EC38 /* CharatersRepositoryMock.swift */; };
+		C62127282C6E0AAF0005EC38 /* CharatersViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62127272C6E0AAF0005EC38 /* CharatersViewModelTests.swift */; };
 		C62A251E2C6B338A00873D40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62A251D2C6B338A00873D40 /* AppDelegate.swift */; };
 		C62A25202C6B338A00873D40 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62A251F2C6B338A00873D40 /* SceneDelegate.swift */; };
 		C62A25222C6B338A00873D40 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62A25212C6B338A00873D40 /* ViewController.swift */; };
 		C62A25272C6B338B00873D40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C62A25262C6B338B00873D40 /* Assets.xcassets */; };
 		C62A252A2C6B338B00873D40 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = C62A25292C6B338B00873D40 /* Base */; };
-		C62A25352C6B338B00873D40 /* iOSTakeHomeTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62A25342C6B338B00873D40 /* iOSTakeHomeTestTests.swift */; };
 		C62A253F2C6B338B00873D40 /* iOSTakeHomeTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62A253E2C6B338B00873D40 /* iOSTakeHomeTestUITests.swift */; };
 		C62A25412C6B338B00873D40 /* iOSTakeHomeTestUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62A25402C6B338B00873D40 /* iOSTakeHomeTestUITestsLaunchTests.swift */; };
 		C62A25502C6B34BB00873D40 /* CharatersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C62A254F2C6B34BB00873D40 /* CharatersViewController.xib */; };
@@ -56,6 +59,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C62127212C6E01670005EC38 /* APIClientProtocolMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientProtocolMock.swift; sourceTree = "<group>"; };
+		C62127232C6E05B80005EC38 /* CharatersRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharatersRepositoryTest.swift; sourceTree = "<group>"; };
+		C62127252C6E0A090005EC38 /* CharatersRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharatersRepositoryMock.swift; sourceTree = "<group>"; };
+		C62127272C6E0AAF0005EC38 /* CharatersViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharatersViewModelTests.swift; sourceTree = "<group>"; };
 		C62A251A2C6B338A00873D40 /* iOSTakeHomeTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSTakeHomeTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C62A251D2C6B338A00873D40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C62A251F2C6B338A00873D40 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,7 +71,6 @@
 		C62A25292C6B338B00873D40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C62A252B2C6B338B00873D40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C62A25302C6B338B00873D40 /* iOSTakeHomeTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSTakeHomeTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C62A25342C6B338B00873D40 /* iOSTakeHomeTestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSTakeHomeTestTests.swift; sourceTree = "<group>"; };
 		C62A253A2C6B338B00873D40 /* iOSTakeHomeTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSTakeHomeTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C62A253E2C6B338B00873D40 /* iOSTakeHomeTestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSTakeHomeTestUITests.swift; sourceTree = "<group>"; };
 		C62A25402C6B338B00873D40 /* iOSTakeHomeTestUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSTakeHomeTestUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -116,6 +122,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C62127202C6E01130005EC38 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				C62127212C6E01670005EC38 /* APIClientProtocolMock.swift */,
+				C62127252C6E0A090005EC38 /* CharatersRepositoryMock.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
 		C62A25112C6B338A00873D40 = {
 			isa = PBXGroup;
 			children = (
@@ -155,7 +170,9 @@
 		C62A25332C6B338B00873D40 /* iOSTakeHomeTestTests */ = {
 			isa = PBXGroup;
 			children = (
-				C62A25342C6B338B00873D40 /* iOSTakeHomeTestTests.swift */,
+				C62127202C6E01130005EC38 /* Mock */,
+				C62127232C6E05B80005EC38 /* CharatersRepositoryTest.swift */,
+				C62127272C6E0AAF0005EC38 /* CharatersViewModelTests.swift */,
 			);
 			path = iOSTakeHomeTestTests;
 			sourceTree = "<group>";
@@ -432,7 +449,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C62A25352C6B338B00873D40 /* iOSTakeHomeTestTests.swift in Sources */,
+				C62127242C6E05B80005EC38 /* CharatersRepositoryTest.swift in Sources */,
+				C62127222C6E01670005EC38 /* APIClientProtocolMock.swift in Sources */,
+				C62127262C6E0A090005EC38 /* CharatersRepositoryMock.swift in Sources */,
+				C62127282C6E0AAF0005EC38 /* CharatersViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
