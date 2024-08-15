@@ -26,9 +26,8 @@ class CharatersRepository : CharactersGatway {
             guard let url = pagingModel.info?.next else {
                 throw NSError(domain: "Invalid URL", code: 0, userInfo: nil)
             }
-            apiService.setBaseUrl(url: url)
             
-            let newPagingData: PagingModel<Character> = try await apiService.requestHttp(method: .get, path: "", parameters: nil, body: nil, headers: [:])
+            let newPagingData: PagingModel<Character> = try await apiService.requestHttp(customBaseUrl:url ,method: .get, path: "", parameters: nil, body: nil, headers: [:])
             
             pagingModel.results.append(contentsOf: newPagingData.results)
             pagingModel.info = newPagingData.info

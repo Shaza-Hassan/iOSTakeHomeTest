@@ -8,7 +8,6 @@
 import Foundation
 
 protocol APIClientProtocol {
-    
     func requestHttp<ResponseModel: Decodable>(
         method: HTTPMethod,
         path: String,
@@ -17,35 +16,30 @@ protocol APIClientProtocol {
         headers: [String: String]
     ) async throws -> ResponseModel
     
-    func setBaseUrl(url: String)
+    func requestHttp<ResponseModel: Decodable>(
+        customBaseUrl: String,
+        method: HTTPMethod,
+        path: String,
+        parameters: [String: Any]?,
+        body: Data?,
+        headers: [String: String]
+    ) async throws -> ResponseModel    
 }
-    
 
-class APIClient : APIClientProtocol {
-    fileprivate let invalidUrl = 0 // Not http error
-
-    // your code -> version number
-    private let appVersion = Bundle.getString(key: "CFBundleShortVersionString")
-    // value for build number
-    private let buildVersion = Bundle.getString(key: "CFBundleVersion")
+class APIClient: APIClientProtocol {
+    private let invalidUrlCode = 0 // Not an HTTP error
+    private let baseUrlKey = "CFBundleShortVersionString"
+    private let buildNumberKey = "CFBundleVersion"
+    private var baseURL: String
     
-    var version : String {
-        return "\(appVersion)(\(buildVersion))"
-    }
-    
-    var baseURL : String
-    
-    init(){
-        baseURL = "https://rickandmortyapi.com/api"
-    }
-    
-    init(baseURL: String){
+    init(baseURL: String = "https://rickandmortyapi.com/api") {
         self.baseURL = baseURL
     }
     
-    
-    func setBaseUrl(url: String) {
-        baseURL = url
+    var version: String {
+        let appVersion = Bundle.getString(key: baseUrlKey)
+        let buildVersion = Bundle.getString(key: buildNumberKey)
+        return "\(appVersion)(\(buildVersion))"
     }
     
     func requestHttp<ResponseModel: Decodable>(
@@ -55,37 +49,50 @@ class APIClient : APIClientProtocol {
         body: Data?,
         headers: [String: String]
     ) async throws -> ResponseModel {
-        
-        var mergedHeders: [String: String] = [:]
-        mergedHeders = try await mergeWithHeaders(headers: headers)
-        
+        let mergedHeaders = try await mergeWithHeaders(headers: headers)
         let request = try buildUrlRequest(
             url: baseURL,
             method: method,
             path: path,
             parameters: parameters,
             body: body,
-            headers: mergedHeders
+            headers: mergedHeaders
         )
         
-        let (data, response) = try await URLSession.shared.data(for: request as URLRequest)
-        ///decode json
-        let responseModel = try JSONDecoder().decode(ResponseModel.self, from: data)
-        return responseModel
+        let (data, _) = try await URLSession.shared.data(for: request)
+        return try JSONDecoder().decode(ResponseModel.self, from: data)
+    }
+    func requestHttp<ResponseModel: Decodable>(
+        customBaseUrl: String,
+        method: HTTPMethod,
+        path: String,
+        parameters: [String: Any]? = nil,
+        body: Data?,
+        headers: [String: String]
+    ) async throws -> ResponseModel {
+        let mergedHeaders = try await mergeWithHeaders(headers: headers)
+        let request = try buildUrlRequest(
+            url: customBaseUrl,
+            method: method,
+            path: path,
+            parameters: parameters,
+            body: body,
+            headers: mergedHeaders
+        )
+        
+        let (data, _) = try await URLSession.shared.data(for: request)
+        return try JSONDecoder().decode(ResponseModel.self, from: data)
     }
     
     private func mergeWithHeaders(headers: [String: String]) async throws -> [String: String] {
-        var mergedHeaders: [String: String] = [:]
+        var mergedHeaders: [String: String] = [
+            "Platform": "ios_customer",
+            "Version": version,
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        ]
         
-        mergedHeaders["Platform"] = "ios_customer"
-        mergedHeaders["Version"] = version
-        mergedHeaders["Accept"] = "application/json"
-        mergedHeaders["Content-Type"] = "application/json"
-        
-        headers.forEach {
-            mergedHeaders[$0.key] = $0.value
-        }
-        
+        headers.forEach { mergedHeaders[$0.key] = $0.value }
         return mergedHeaders
     }
     
@@ -97,51 +104,45 @@ class APIClient : APIClientProtocol {
         body: Data?,
         headers: [String: String]
     ) throws -> URLRequest {
-        let pathString = path.isEmpty ? "" : "/\(path)"
-        let urlWithPathString = "\(url)\(pathString)"
-        let queryItemsString: String
+        let urlString = url + (path.isEmpty ? "" : "/\(path)")
+        let queryItemsString = try buildQueryItems(parameters: parameters, path: path)
+        let fullUrlString = urlString + queryItemsString
+        let fullUrl = try validateUrl(URL(string: fullUrlString))
         
-        let newParams : [String: Any]? = parameters?.mapValues{ (value) in
-            if value is String {
-                if #available(iOS 17.0, *) {
-                    return value
-                } else {
-                    return (value as! String).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-                }
-            }else {
-                return value
-            }
-        }
-        
-        if path.contains("?") {
-            queryItemsString =  newParams == nil ? "" : "&\(newParams!.map {"\($0)=\($1)"}.joined(separator: "&"))"
-        } else {
-            queryItemsString =  newParams == nil ? "" : "?\(newParams!.map {"\($0)=\($1)"}.joined(separator: "&"))"
-        }
-        let urlWithParametersString = "\(urlWithPathString)\(queryItemsString)"
-        
-        
-        let fullUrl = try validateUrl(url: URL(string: urlWithParametersString))
-        let request = NSMutableURLRequest(url: fullUrl)
+        var request = URLRequest(url: fullUrl)
         request.httpMethod = method.rawValue
         request.httpBody = body
         request.allHTTPHeaderFields = headers
-        return request as URLRequest
+        return request
     }
-
     
-    func validateUrl(url: URL?) throws -> URL {
+    private func buildQueryItems(parameters: [String: Any]?, path: String) throws -> String {
+        guard let params = parameters?.mapValues({ value -> Any in
+            if let stringValue = value as? String {
+                return stringValue.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+            }
+            return value
+        }) else {
+            return ""
+        }
+        
+        let queryItems = params.map { "\($0)=\($1)" }.joined(separator: "&")
+        return path.contains("?") ? "&\(queryItems)" : "?\(queryItems)"
+    }
+    
+    private func validateUrl(_ url: URL?) throws -> URL {
         guard let url = url else {
-            throw APIError(statusCode: invalidUrl,error: stringFromStatusCode(statusCode: invalidUrl), errorsCode: invalidUrl)
+            throw APIError(
+                statusCode: invalidUrlCode,
+                error: stringFromStatusCode(statusCode: invalidUrlCode),
+                errorsCode: invalidUrlCode
+            )
         }
         return url
     }
     
-    func stringFromStatusCode(statusCode: Int) -> String {
-        switch statusCode {
-        case invalidUrl: return "Invalid URL"
-        default: return "Unknown Error"
-        }
+    private func stringFromStatusCode(statusCode: Int) -> String {
+        return statusCode == invalidUrlCode ? "Invalid URL" : "Unknown Error"
     }
 }
 

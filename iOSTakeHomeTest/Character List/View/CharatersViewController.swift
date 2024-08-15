@@ -38,13 +38,21 @@ class CharatersViewController: UIViewController {
         viewModel.fetchCharacters()
 
         navigationController?.navigationBar.prefersLargeTitles = true
+
         title = "Characters"
+        charactersTableView?.setContentOffset(CGPoint(x: 0, y: -1), animated: false)
+
         charactersTableView?.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
         let filterNib = UINib(nibName: "FilterTableViewCell", bundle: nil)
         charactersTableView?.register(filterNib, forCellReuseIdentifier: "filter")
         
         observeViewModel()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     deinit {
@@ -98,7 +106,10 @@ extension CharatersViewController : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == CharaterSections.characters.rawValue {
-            print("Selected character: \(dummyCharacters[indexPath.row].name)")
+            let vm = CharacterDetailsViewModel(character: viewModel.characters[indexPath.row])
+            let view = CharacterDetailsView(viewModel: vm)
+            let hostingController = UIHostingController(rootView: view)
+            navigationController?.pushViewController(hostingController, animated: true)
         }
     }
 }

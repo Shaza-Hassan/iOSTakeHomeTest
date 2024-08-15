@@ -24,8 +24,8 @@ class FilterTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollecti
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
         flowLayout.sectionInset = .zero
-        flowLayout.minimumInteritemSpacing = 0
-        flowLayout.minimumLineSpacing = -1
+        flowLayout.minimumInteritemSpacing = 4
+        flowLayout.minimumLineSpacing = 4
         flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         
         collectionView?.collectionViewLayout = flowLayout
@@ -45,7 +45,7 @@ class FilterTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollecti
         let filter = FilterStatus.allCases[indexPath.row]
         cell.contentConfiguration = UIHostingConfiguration{
             FilterCell(filter: filter, isSelected: filter == selectedFilter)
-        }
+        }.margins(.horizontal, 2)
 
         return cell
     }

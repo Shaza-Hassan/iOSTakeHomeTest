@@ -27,7 +27,7 @@ class CharatersViewModel {
     @MainActor
     func setFilterStatus(filterStatus: FilterStatus?) {
         self.filterStatus = filterStatus
-        charactesPagingModel = PagingModel(pagingStatus: .firstPageLoading)
+        charactesPagingModel = PagingModel.empty
         fetchCharacters()
     }
     
@@ -39,7 +39,7 @@ class CharatersViewModel {
                 charactesPagingModel = pagingModel
             } catch {
                 switch charactesPagingModel.pagingStatus {
-                case .idle:
+                case .idle,.firstPageLoading:
                     charactesPagingModel.pagingStatus = .firstPageError
     
                 case .loadingMore:

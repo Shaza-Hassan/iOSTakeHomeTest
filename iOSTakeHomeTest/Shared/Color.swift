@@ -34,6 +34,17 @@ extension UIColor {
         return UIColor(red: 251/255, green: 231/255, blue: 235/255, alpha: 1.0)
     }
     
+    @nonobjc class var statusColor : UIColor {
+        return UIColor(red: 97/255, green: 203/255, blue: 244/255, alpha: 1.0)
+    }
+    
+    @nonobjc class var spicesColor: UIColor {
+        return UIColor(red: 79/255, green: 72/255, blue: 114/255, alpha: 1.0)
+    }
+    
+    @nonobjc class var genderColor : UIColor {
+        return UIColor(red: 130/255, green: 124/255, blue: 156/255, alpha: 1.0)
+    }
 }
 
 extension Color {
@@ -43,4 +54,7 @@ extension Color {
     static let lightGrayBorder = Color(UIColor.lightGrayBorder)
     static let aliveColor = Color(UIColor.aliveColor)
     static let deadColor = Color(UIColor.deadColor)
+    static let statusColor = Color(UIColor.statusColor)
+    static let spicesColor = Color(UIColor.spicesColor)
+    static let genderColor = Color(UIColor.genderColor)
 }
